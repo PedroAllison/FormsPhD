@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela de Perguntas com Alternativas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 90%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .radio-group label {
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .edit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tabela de Perguntas com Alternativas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Pergunta</th>
+                <th>Alternativas</th>
+            </tr>
+        </thead>
+        <tbody id="questionTable"></tbody>
+    </table>
+
+    <button class="edit-btn" onclick="enableEditing()">Habilitar Edição</button>
+
+    <script>
+        // Array com perguntas e alternativas iniciais
+        const questions = [
+            { question: "Pergunta 1", a: "Alternativa A1", b: "Alternativa B1", c: "Alternativa C1", d: "Alternativa D1" },
+            { question: "Pergunta 2", a: "Alternativa A2", b: "Alternativa B2", c: "Alternativa C2", d: "Alternativa D2" },
+            { question: "Pergunta 3", a: "Alternativa A3", b: "Alternativa B3", c: "Alternativa C3", d: "Alternativa D3" },
+            { question: "Pergunta 4", a: "Alternativa A4", b: "Alternativa B4", c: "Alternativa C4", d: "Alternativa D4" },
+            { question: "Pergunta 5", a: "Alternativa A5", b: "Alternativa B5", c: "Alternativa C5", d: "Alternativa D5" },
+            { question: "Pergunta 6", a: "Alternativa A6", b: "Alternativa B6", c: "Alternativa C6", d: "Alternativa D6" },
+            { question: "Pergunta 7", a: "Alternativa A7", b: "Alternativa B7", c: "Alternativa C7", d: "Alternativa D7" },
+            { question: "Pergunta 8", a: "Alternativa A8", b: "Alternativa B8", c: "Alternativa C8", d: "Alternativa D8" },
+            { question: "Pergunta 9", a: "Alternativa A9", b: "Alternativa B9", c: "Alternativa C9", d: "Alternativa D9" },
+            { question: "Pergunta 10", a: "Alternativa A10", b: "Alternativa B10", c: "Alternativa C10", d: "Alternativa D10" },
+        ];
+
+        // Renderizar a tabela
+        function renderTable() {
+            const table = document.getElementById('questionTable');
+            table.innerHTML = ""; // Limpar tabela existente
+            questions.forEach((q, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><input type="text" value="${q.question}" disabled></td>
+                    <td>
+                        <div class="radio-group">
+                            <label><input type="radio" name="question${index}" value="A"> ${q.a}</label>
+                            <label><input type="radio" name="question${index}" value="B"> ${q.b}</label>
+                            <label><input type="radio" name="question${index}" value="C"> ${q.c}</label>
+                            <label><input type="radio" name="question${index}" value="D"> ${q.d}</label>
+                        </div>
+                    </td>
+                `;
+                table.appendChild(row);
+            });
+        }
+
+        // Habilitar edição das perguntas
+        function enableEditing() {
+            const inputs = document.querySelectorAll('input[type="text"]');
+            inputs.forEach(input => input.disabled = false);
+        }
+
+        // Inicializar tabela
+        renderTable();
+    </script>
+</body>
+</html>
